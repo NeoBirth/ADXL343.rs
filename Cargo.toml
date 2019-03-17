@@ -1,0 +1,18 @@
+[package]
+name        = "adxl343"
+description = "ADXL343 accelerometer driver which uses I2C via embedded-hal"
+version     = "0.0.0"
+authors     = ["Tony Arcieri <bascule@gmail.com>"]
+license     = "Apache-2.0"
+homepage    = "https://neobirth.org"
+repository  = "https://github.com/NeoBirth/ADXL343.rs"
+readme      = "README.md"
+edition     = "2018"
+categories  = ["embedded", "no-std"]
+keywords    = ["analog-devices", "accelerometer", "neotrellis"]
+
+[dependencies]
+embedded-hal = "0.2"
+
+[badges]
+travis-ci = { repository = "NeoBirth/ADXL343.rs" }
