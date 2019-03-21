@@ -1,6 +1,6 @@
 [package]
 name        = "adxl343"
-description = "ADXL343 accelerometer driver which uses I2C via embedded-hal"
+description = "Platform-agnostic ADXL343 accelerometer driver which uses I2C via embedded-hal"
 version     = "0.0.0"
 authors     = ["Tony Arcieri <bascule@gmail.com>"]
 license     = "Apache-2.0"

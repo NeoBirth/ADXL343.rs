@@ -10,6 +10,7 @@ branches:
 install:
   - rustup component add rustfmt
   - rustup component add clippy
+  - rustup target add thumbv7em-none-eabihf
 
 matrix:
   include:
@@ -22,3 +23,9 @@ matrix:
     - name: build
       script:
         - cargo build --release
+    - name: build (thumbv7em-none-eabihf target)
+      script:
+        - cargo build --target thumbv7em-none-eabihf --no-default-features --release
+    - name: test
+      script:
+        - cargo test --release
