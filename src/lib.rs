@@ -131,8 +131,21 @@ impl Register {
     }
 }
 
+/// XYZ triple representing raw values
+#[derive(Copy, Clone, Debug, Default, Eq, PartialEq)]
+pub struct Xyz {
+    /// X component
+    pub x: u16,
+
+    /// Y component
+    pub y: u16,
+
+    /// Z component
+    pub z: u16,
+}
+
 /// XYZ triple representing acceleration
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Default, PartialEq)]
 pub struct Ax3 {
     /// X component
     pub x: f32,
@@ -142,6 +155,16 @@ pub struct Ax3 {
 
     /// Z component
     pub z: f32,
+}
+
+impl From<Xyz> for Ax3 {
+    fn from(raw: Xyz) -> Ax3 {
+        Ax3 {
+            x: f32::from(raw.x) / SENSITIVITY,
+            y: f32::from(raw.y) / SENSITIVITY,
+            z: f32::from(raw.z) / SENSITIVITY,
+        }
+    }
 }
 
 /// ADXL343 driver
@@ -187,17 +210,18 @@ where
         Ok(adxl343)
     }
 
-    /// Get acceleration data
-    pub fn get_acceleration(&mut self) -> Result<Ax3, E> {
-        let raw_x = self.read_register16(Register::DATAX0)?;
-        let raw_y = self.read_register16(Register::DATAY0)?;
-        let raw_z = self.read_register16(Register::DATAZ0)?;
+    /// Get raw acceleration values
+    pub fn xyz(&mut self) -> Result<Xyz, E> {
+        let x = self.read_register16(Register::DATAX0)?;
+        let y = self.read_register16(Register::DATAY0)?;
+        let z = self.read_register16(Register::DATAZ0)?;
 
-        Ok(Ax3 {
-            x: f32::from(raw_x) / SENSITIVITY,
-            y: f32::from(raw_y) / SENSITIVITY,
-            z: f32::from(raw_z) / SENSITIVITY,
-        })
+        Ok(Xyz { x, y, z })
+    }
+
+    /// Get computed acceleration within (?) range
+    pub fn accel(&mut self) -> Result<Ax3, E> {
+        Ok(self.xyz()?.into())
     }
 
     /// Get the device ID
