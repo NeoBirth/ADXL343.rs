@@ -13,7 +13,7 @@
     unused_qualifications
 )]
 #![forbid(unsafe_code)]
-#![doc(html_root_url = "https://docs.rs/adxl343/0.0.0")]
+#![doc(html_root_url = "https://docs.rs/adxl343/0.1.0")]
 
 extern crate embedded_hal as hal;
 
