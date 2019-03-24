@@ -6,8 +6,12 @@
 [![LGPL 3.0 licensed][license-image]][license-link]
 [![Gitter Chat][gitter-image]][gitter-link]
 
-ADXL343 accelerometer driver which uses I2C via `embedded-hal`. Usable via any
-compatible board crate (e.g. [trellis_m4])
+Platform-agnostic driver for the [Analog Devices ADXL343][device-info]
+3-axis accelerometer driver which uses I2C via `embedded-hal`.
+Usable via any compatible board crate (e.g. [trellis_m4]).
+
+Implements the [`Accelerometer` trait][acc-trait] from the
+[`accelerometer` crate][acc-crate].
 
 [Documentation][docs-link]
 
@@ -36,6 +40,9 @@ Dual licensed under your choice of either of:
 [license-link]: https://github.com/NeoBirth/ADXL343.rs/blob/master/LICENSE
 [gitter-image]: https://badges.gitter.im/NeoBirth/ADXL343.rs.svg
 [gitter-link]: https://gitter.im/NeoBirth/community
+[device-info]: https://www.analog.com/en/products/adxl343.html
 [trellis_m4]: https://crates.io/crates/trellis_m4
+[acc-trait]: https://docs.rs/accelerometer/latest/accelerometer/trait.Accelerometer.html
+[acc-crate]: https://crates.io/crates/accelerometer
 [cc]: https://contributor-covenant.org
 [CODE_OF_CONDUCT.md]: https://github.com/NeoBirth/ADXL343.rs/blob/master/CODE_OF_CONDUCT.md
