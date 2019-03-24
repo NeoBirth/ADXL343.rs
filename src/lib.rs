@@ -1,6 +1,9 @@
-//! ADXL343 accelerometer driver which uses I2C via [embedded-hal]
+//! Platform-agnostic ADXL343 accelerometer driver which uses I2C via
+//! [embedded-hal] and implements the [`Accelerometer` trait][trait]
+//! from the `accelerometer` crate.
 //!
 //! [embedded-hal]: https://docs.rs/embedded-hal
+//! [trait]: https://docs.rs/accelerometer/latest/accelerometer/trait.Accelerometer.html
 
 #![no_std]
 #![deny(
@@ -13,7 +16,7 @@
     unused_qualifications
 )]
 #![forbid(unsafe_code)]
-#![doc(html_root_url = "https://docs.rs/adxl343/0.2.0")]
+#![doc(html_root_url = "https://docs.rs/adxl343/0.3.0")]
 
 extern crate embedded_hal as hal;
 
