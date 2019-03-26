@@ -15,6 +15,11 @@ Implements the [`Accelerometer` trait][acc-trait] from the
 
 [Documentation][docs-link]
 
+## Requirements
+
+- Rust 1.32+
+- `embedded-hal` I2C driver
+
 ## Code of Conduct
 
 We abide by the [Contributor Covenant][cc] and ask that you do as well.

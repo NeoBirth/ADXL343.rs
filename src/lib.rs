@@ -18,12 +18,14 @@
 #![forbid(unsafe_code)]
 #![doc(html_root_url = "https://docs.rs/adxl343/0.3.0")]
 
+pub extern crate accelerometer;
 extern crate embedded_hal as hal;
 
-mod register;
+pub mod register;
 
 use self::register::Register;
-use accelerometer::{Accelerometer, U16x3};
+use accelerometer::{Accelerometer, Error, ErrorKind, U16x3};
+use core::fmt::Debug;
 use hal::blocking::i2c::{Write, WriteRead};
 
 /// ADXL343 I2C address.
@@ -41,14 +43,16 @@ pub struct Adxl343<I2C> {
 impl<I2C, E> Adxl343<I2C>
 where
     I2C: WriteRead<Error = E> + Write<Error = E>,
+    E: Debug,
 {
     /// Create a new ADXL343 driver from the given I2C peripheral
-    pub fn new(i2c: I2C) -> Result<Self, E> {
+    pub fn new(i2c: I2C) -> Result<Self, Error<E>> {
         let mut adxl343 = Adxl343 { i2c };
         let device_id = adxl343.get_device_id()?;
 
-        // TODO: return an error here instead of panicking?
-        assert_eq!(device_id, DEVICE_ID, "unexpected device ID: {}", device_id);
+        if device_id != DEVICE_ID {
+            ErrorKind::Device.err()?;
+        }
 
         // Default tap detection level: 2G, 31.25ms duration, single tap only
         //
@@ -76,6 +80,16 @@ where
         Ok(adxl343)
     }
 
+    /// Write to the given register
+    pub fn write_register(&mut self, register: Register, value: u8) -> Result<(), E> {
+        self.i2c.write(ADDRESS, &[register.addr(), value])
+    }
+
+    /// Write to a given register, then read the result
+    pub fn write_read_register(&mut self, register: Register, buffer: &mut [u8]) -> Result<(), E> {
+        self.i2c.write_read(ADDRESS, &[register.addr()], buffer)
+    }
+
     /// Get the device ID
     fn get_device_id(&mut self) -> Result<u8, E> {
         let mut buffer = [0u8];
@@ -86,31 +100,24 @@ where
         Ok(buffer[0])
     }
 
-    /// Read a 16-byte value from the given register
-    fn read_register16(&mut self, register: Register) -> Result<u16, E> {
+    /// Write to a given register, then read a `u16` result
+    fn write_read_u16(&mut self, register: Register) -> Result<u16, E> {
         let mut buffer = [0u8; 2];
-
-        self.i2c
-            .write_read(ADDRESS, &[register.addr()], &mut buffer)?;
-
-        Ok(u16::from(buffer[0]) << 8 | u16::from(buffer[1]))
-    }
-
-    /// Write to the given register
-    fn write_register(&mut self, register: Register, value: u8) -> Result<(), E> {
-        self.i2c.write(ADDRESS, &[register.addr(), value])
+        self.write_read_register(register, &mut buffer)?;
+        Ok(u16::from_be_bytes(buffer))
     }
 }
 
 impl<I2C, E> Accelerometer<U16x3, E> for Adxl343<I2C>
 where
     I2C: WriteRead<Error = E> + Write<Error = E>,
+    E: Debug,
 {
     /// Get acceleration reading from the accelerometer
-    fn acceleration(&mut self) -> Result<U16x3, E> {
-        let x = self.read_register16(Register::DATAX0)?;
-        let y = self.read_register16(Register::DATAY0)?;
-        let z = self.read_register16(Register::DATAZ0)?;
+    fn acceleration(&mut self) -> Result<U16x3, Error<E>> {
+        let x = self.write_read_u16(Register::DATAX0)?;
+        let y = self.write_read_u16(Register::DATAY0)?;
+        let z = self.write_read_u16(Register::DATAZ0)?;
 
         Ok(U16x3::new(x, y, z))
     }
