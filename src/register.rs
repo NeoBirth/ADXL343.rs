@@ -1,7 +1,9 @@
+//! ADXL343 register addresses
+
 /// Register addresses
 #[allow(dead_code, non_camel_case_types)]
 #[derive(Copy, Clone, Debug)]
-pub(crate) enum Register {
+pub enum Register {
     /// Device ID
     DEVICE_ID = 0x00,
 

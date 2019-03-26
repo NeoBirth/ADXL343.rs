@@ -1,11 +1,14 @@
 language: rust
-rust: stable
 os: linux
 cache: cargo
 
 branches:
   only:
     - master
+
+rust:
+  - 1.32.0
+  - stable
 
 install:
   - rustup component add rustfmt
