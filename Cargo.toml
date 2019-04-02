@@ -13,7 +13,13 @@ keywords    = ["analog-devices", "accelerometer"]
 
 [dependencies]
 accelerometer = "0.3"
+bitflags = "1"
 embedded-hal = "0.2"
+
+[features]
+default = ["i16x3"]
+i16x3 = []
+u16x3 = []
 
 [badges]
 travis-ci = { repository = "NeoBirth/ADXL343.rs" }
