@@ -16,7 +16,7 @@
     unused_qualifications
 )]
 #![forbid(unsafe_code)]
-#![doc(html_root_url = "https://docs.rs/adxl343/0.3.0")]
+#![doc(html_root_url = "https://docs.rs/adxl343/0.4.0")]
 
 pub extern crate accelerometer;
 extern crate embedded_hal as hal;
