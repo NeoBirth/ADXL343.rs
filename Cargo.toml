@@ -8,11 +8,11 @@ homepage    = "https://neobirth.org"
 repository  = "https://github.com/NeoBirth/ADXL343.rs"
 readme      = "README.md"
 edition     = "2018"
-categories  = ["embedded", "no-std"]
+categories  = ["embedded", "hardware-support", "no-std"]
 keywords    = ["analog-devices", "accelerometer"]
 
 [dependencies]
-accelerometer = { version = "0.4", features = ["orientation"] }
+accelerometer = { version = "0.5.2", features = ["orientation"] }
 bitflags = "1"
 embedded-hal = "0.2"
 
