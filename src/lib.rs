@@ -16,7 +16,7 @@
     unused_qualifications
 )]
 #![forbid(unsafe_code)]
-#![doc(html_root_url = "https://docs.rs/adxl343/0.4.1")]
+#![doc(html_root_url = "https://docs.rs/adxl343/0.4.2")]
 
 mod register;
 
