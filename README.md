@@ -7,7 +7,7 @@
 [![Gitter Chat][gitter-image]][gitter-link]
 
 Platform-agnostic driver for the [Analog Devices ADXL343][device-info]
-3-axis accelerometer driver which uses I2C via `embedded-hal`.
+3-axis accelerometer driver which uses I²C via `embedded-hal`.
 Usable via any compatible board crate (e.g. [trellis_m4]).
 
 Implements the [`Accelerometer` trait][acc-trait] from the
@@ -18,7 +18,7 @@ Implements the [`Accelerometer` trait][acc-trait] from the
 ## Requirements
 
 - Rust 1.32+
-- `embedded-hal` I2C driver
+- `embedded-hal` I²C driver
 
 ## Code of Conduct
 
