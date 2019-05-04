@@ -1,3 +1,7 @@
+## [0.4.1] (2019-05-03)
+
+- Update to accelerometer.rs v0.5.2 ([#14])
+
 ## [0.4.0] (2019-04-04)
 
 - `accelerometer` v0.4 crate upgrade + tracker support ([#12])
@@ -16,6 +20,8 @@
 
 - Initial release
 
+[0.4.1]: https://github.com/NeoBirth/ADXL343.rs/pull/15
+[#14]: https://github.com/NeoBirth/ADXL343.rs/pull/14
 [0.4.0]: https://github.com/NeoBirth/ADXL343.rs/pull/13
 [#12]: https://github.com/NeoBirth/ADXL343.rs/pull/12
 [#11]: https://github.com/NeoBirth/ADXL343.rs/pull/11

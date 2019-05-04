@@ -1,18 +1,18 @@
 [package]
 name        = "adxl343"
 description = "Platform-agnostic ADXL343 accelerometer driver which uses I2C via embedded-hal"
-version     = "0.4.0"
+version     = "0.4.1"
 authors     = ["Tony Arcieri <bascule@gmail.com>"]
 license     = "Apache-2.0"
 homepage    = "https://neobirth.org"
 repository  = "https://github.com/NeoBirth/ADXL343.rs"
 readme      = "README.md"
 edition     = "2018"
-categories  = ["embedded", "no-std"]
+categories  = ["embedded", "hardware-support", "no-std"]
 keywords    = ["analog-devices", "accelerometer"]
 
 [dependencies]
-accelerometer = { version = "0.4", features = ["orientation"] }
+accelerometer = { version = "0.5.2", features = ["orientation"] }
 bitflags = "1"
 embedded-hal = "0.2"
 
@@ -22,4 +22,4 @@ i16x3 = []
 u16x3 = []
 
 [badges]
-travis-ci = { repository = "NeoBirth/ADXL343.rs" }
+travis-ci = { repository = "NeoBirth/ADXL343.rs", branch = "develop" }

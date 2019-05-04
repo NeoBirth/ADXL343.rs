@@ -39,10 +39,10 @@ Dual licensed under your choice of either of:
 [crate-link]: https://crates.io/crates/adxl343
 [docs-image]: https://docs.rs/adxl343/badge.svg
 [docs-link]: https://docs.rs/adxl343/
-[build-image]: https://secure.travis-ci.org/NeoBirth/ADXL343.rs.svg?branch=master
+[build-image]: https://secure.travis-ci.org/NeoBirth/ADXL343.rs.svg?branch=develop
 [build-link]: https://travis-ci.org/NeoBirth/ADXL343.rs
 [license-image]: https://img.shields.io/badge/license-Apache2.0-blue.svg
-[license-link]: https://github.com/NeoBirth/ADXL343.rs/blob/master/LICENSE
+[license-link]: https://github.com/NeoBirth/ADXL343.rs/blob/develop/LICENSE
 [gitter-image]: https://badges.gitter.im/NeoBirth/ADXL343.rs.svg
 [gitter-link]: https://gitter.im/NeoBirth/community
 [device-info]: https://www.analog.com/en/products/adxl343.html
@@ -50,4 +50,4 @@ Dual licensed under your choice of either of:
 [acc-trait]: https://docs.rs/accelerometer/latest/accelerometer/trait.Accelerometer.html
 [acc-crate]: https://crates.io/crates/accelerometer
 [cc]: https://contributor-covenant.org
-[CODE_OF_CONDUCT.md]: https://github.com/NeoBirth/ADXL343.rs/blob/master/CODE_OF_CONDUCT.md
+[CODE_OF_CONDUCT.md]: https://github.com/NeoBirth/ADXL343.rs/blob/develop/CODE_OF_CONDUCT.md
