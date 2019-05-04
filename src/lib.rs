@@ -18,14 +18,13 @@
 #![forbid(unsafe_code)]
 #![doc(html_root_url = "https://docs.rs/adxl343/0.4.1")]
 
-pub extern crate accelerometer;
-extern crate embedded_hal as hal;
-
 mod register;
 
-pub use self::register::{DataFormatFlags, DataFormatRange};
+pub use crate::register::{DataFormatFlags, DataFormatRange};
+pub use accelerometer;
+use embedded_hal as hal;
 
-use self::register::Register;
+use crate::register::Register;
 #[cfg(feature = "i16x3")]
 use accelerometer::I16x3;
 #[cfg(feature = "u16x3")]
