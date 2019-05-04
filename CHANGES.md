@@ -1,3 +1,7 @@
+## [0.4.2] (2019-05-04)
+
+- Update to accelerometer.rs v0.6 ([#17])
+
 ## [0.4.1] (2019-05-03)
 
 - Update to accelerometer.rs v0.5.2 ([#14])
@@ -20,6 +24,8 @@
 
 - Initial release
 
+[0.4.2]: https://github.com/NeoBirth/ADXL343.rs/pull/19
+[#17]: https://github.com/NeoBirth/ADXL343.rs/pull/17
 [0.4.1]: https://github.com/NeoBirth/ADXL343.rs/pull/15
 [#14]: https://github.com/NeoBirth/ADXL343.rs/pull/14
 [0.4.0]: https://github.com/NeoBirth/ADXL343.rs/pull/13
