@@ -8,13 +8,17 @@ branches:
 
 rust: stable
 
+env:
+  global:
+    - RUSTFLAGS="-D warnings"
+
 matrix:
   include:
     - name: rustfmt
       install: rustup component add rustfmt
       script: cargo fmt -- --check
     - name: clippy
-      installL: rustup component add clippy
+      install: rustup component add clippy
       script: cargo clippy
     - name: build
       script: cargo build --release

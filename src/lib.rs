@@ -6,17 +6,9 @@
 //! [trait]: https://docs.rs/accelerometer/latest/accelerometer/trait.Accelerometer.html
 
 #![no_std]
-#![deny(
-    warnings,
-    missing_docs,
-    trivial_casts,
-    trivial_numeric_casts,
-    unsafe_code,
-    unused_import_braces,
-    unused_qualifications
-)]
+#![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
 #![forbid(unsafe_code)]
-#![doc(html_root_url = "https://docs.rs/adxl343/0.4.2")]
+#![doc(html_root_url = "https://docs.rs/adxl343/0.4.3")]
 
 mod register;
 
