@@ -8,7 +8,7 @@
 #![no_std]
 #![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
 #![forbid(unsafe_code)]
-#![doc(html_root_url = "https://docs.rs/adxl343/0.4.3")]
+#![doc(html_root_url = "https://docs.rs/adxl343/0.5.0")]
 
 mod register;
 
