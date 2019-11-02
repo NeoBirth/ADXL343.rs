@@ -21,7 +21,7 @@ use crate::register::Register;
 use accelerometer::I16x3;
 #[cfg(feature = "u16x3")]
 use accelerometer::U16x3;
-use accelerometer::{Accelerometer, Error, ErrorKind, Tracker};
+use accelerometer::{Accelerometer, Error, ErrorKind};
 use core::fmt::Debug;
 use hal::blocking::i2c::{Write, WriteRead};
 
@@ -93,12 +93,6 @@ where
         adxl343.write_register(Register::POWER_CTL, 0x08)?;
 
         Ok(adxl343)
-    }
-
-    /// Use this accelerometer as an orientation tracker
-    pub fn try_into_tracker(mut self) -> Result<Tracker<Self, I16x3>, Error<E>> {
-        self.data_format(DataFormatRange::PLUSMINUS_8G)?;
-        Ok(Tracker::new(self, 12000))
     }
 
     /// Set the device data format
