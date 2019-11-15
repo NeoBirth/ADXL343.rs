@@ -12,7 +12,7 @@ categories  = ["embedded", "hardware-support", "no-std"]
 keywords    = ["analog-devices", "accelerometer"]
 
 [dependencies]
-accelerometer = "0.8"
+accelerometer = "0.9"
 bitflags = "1"
 embedded-hal = "0.2"
 
