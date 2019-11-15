@@ -3,7 +3,8 @@
 [![Crate][crate-image]][crate-link]
 [![Docs][docs-image]][docs-link]
 [![Build Status][build-image]][build-link]
-![MSRV][rustc-image]
+[![Safety Dance][safety-image]][safety-link]
+![MSRV][msrv-image]
 [![LGPL 3.0 licensed][license-image]][license-link]
 [![Gitter Chat][gitter-image]][gitter-link]
 
@@ -42,9 +43,11 @@ Dual licensed under your choice of either of:
 [crate-link]: https://crates.io/crates/adxl343
 [docs-image]: https://docs.rs/adxl343/badge.svg
 [docs-link]: https://docs.rs/adxl343/
-[build-image]: https://secure.travis-ci.org/NeoBirth/ADXL343.rs.svg?branch=develop
-[build-link]: https://travis-ci.org/NeoBirth/ADXL343.rs
-[rustc-image]: https://img.shields.io/badge/rustc-1.32+-blue.svg
+[build-image]: https://github.com/neobirth/ADXL343.rs/workflows/Rust/badge.svg
+[build-link]: https://github.com/neobirth/ADXL343.rs/actions
+[safety-image]: https://img.shields.io/badge/unsafe-forbidden-success.svg
+[safety-link]: https://github.com/rust-secure-code/safety-dance/
+[msrv-image]: https://img.shields.io/badge/rustc-1.32+-blue.svg
 [license-image]: https://img.shields.io/badge/license-Apache2.0-blue.svg
 [license-link]: https://github.com/NeoBirth/ADXL343.rs/blob/develop/LICENSE
 [gitter-image]: https://badges.gitter.im/NeoBirth/ADXL343.rs.svg
