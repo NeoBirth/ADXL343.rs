@@ -1,3 +1,7 @@
+## [0.7.0] (2019-12-02)
+
+- Update to accelerometer.rs v0.10 ([#28])
+
 ## [0.6.0] (2019-11-15)
 
 - Update to accelerometer.rs v0.9 ([#26])
