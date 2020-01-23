@@ -18,10 +18,10 @@ use embedded_hal as hal;
 
 use crate::register::Register;
 #[cfg(feature = "i16x3")]
-use accelerometer::I16x3;
+use accelerometer::vector::I16x3;
 #[cfg(feature = "u16x3")]
-use accelerometer::U16x3;
-use accelerometer::{Accelerometer, Error, ErrorKind};
+use accelerometer::vector::U16x3;
+use accelerometer::{Error, ErrorKind, RawAccelerometer};
 use core::fmt::Debug;
 use hal::blocking::i2c::{Write, WriteRead};
 
@@ -166,15 +166,15 @@ where
 }
 
 #[cfg(feature = "i16x3")]
-impl<I2C, E> Accelerometer<I16x3> for Adxl343<I2C>
+impl<I2C, E> RawAccelerometer<I16x3> for Adxl343<I2C>
 where
     I2C: WriteRead<Error = E> + Write<Error = E>,
     E: Debug,
 {
-    type Error = Error<E>;
+    type Error = E;
 
     /// Get acceleration reading from the accelerometer
-    fn acceleration(&mut self) -> Result<I16x3, Error<E>> {
+    fn accel_raw(&mut self) -> Result<I16x3, Error<E>> {
         // TODO: return an error instead of panicking
         assert!(
             !self.data_format.contains(DataFormatFlags::JUSTIFY),
@@ -189,15 +189,15 @@ where
 }
 
 #[cfg(feature = "u16x3")]
-impl<I2C, E> Accelerometer<U16x3> for Adxl343<I2C>
+impl<I2C, E> RawAccelerometer<U16x3> for Adxl343<I2C>
 where
     I2C: WriteRead<Error = E> + Write<Error = E>,
     E: Debug,
 {
-    type Error = Error<E>;
+    type Error = E;
 
     /// Get acceleration reading from the accelerometer
-    fn acceleration(&mut self) -> Result<U16x3, Error<E>> {
+    fn accel_raw(&mut self) -> Result<U16x3, Error<E>> {
         // TODO: return an error instead of panicking
         assert!(
             self.data_format.contains(DataFormatFlags::JUSTIFY),
