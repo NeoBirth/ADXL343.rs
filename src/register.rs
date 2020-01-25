@@ -314,6 +314,23 @@ bitflags! {
     }
 }
 
+impl DataFormatFlags {
+    /// Get the [`DataFormatRange`] from the flags
+    pub fn range(self) -> DataFormatRange {
+        if self.contains(DataFormatFlags::RANGE_HI) {
+            if self.contains(DataFormatFlags::RANGE_LO) {
+                DataFormatRange::PLUSMINUS_16G
+            } else {
+                DataFormatRange::PLUSMINUS_8G
+            }
+        } else if self.contains(DataFormatFlags::RANGE_LO) {
+            DataFormatRange::PLUSMINUS_4G
+        } else {
+            DataFormatRange::PLUSMINUS_2G
+        }
+    }
+}
+
 /// Default `DATA_FORMAT` settings:
 ///
 /// - `SELF_TEST`: false
@@ -360,6 +377,17 @@ impl DataFormatRange {
             DataFormatRange::PLUSMINUS_4G => DataFormatFlags::RANGE_LO,
             DataFormatRange::PLUSMINUS_8G => DataFormatFlags::RANGE_HI,
             DataFormatRange::PLUSMINUS_16G => DataFormatFlags::RANGE_HI | DataFormatFlags::RANGE_LO,
+        }
+    }
+}
+
+impl From<DataFormatRange> for f32 {
+    fn from(range: DataFormatRange) -> f32 {
+        match range {
+            DataFormatRange::PLUSMINUS_2G => 2.0,
+            DataFormatRange::PLUSMINUS_4G => 4.0,
+            DataFormatRange::PLUSMINUS_8G => 8.0,
+            DataFormatRange::PLUSMINUS_16G => 16.0,
         }
     }
 }
