@@ -17,10 +17,13 @@ pub use accelerometer;
 use embedded_hal as hal;
 
 use crate::register::Register;
-#[cfg(feature = "i16x3")]
-use accelerometer::vector::I16x3;
 #[cfg(feature = "u16x3")]
 use accelerometer::vector::U16x3;
+#[cfg(feature = "i16x3")]
+use accelerometer::{
+    vector::{F32x3, I16x3},
+    Accelerometer,
+};
 use accelerometer::{Error, ErrorKind, RawAccelerometer};
 use core::fmt::Debug;
 use hal::blocking::i2c::{Write, WriteRead};
@@ -166,6 +169,38 @@ where
 }
 
 #[cfg(feature = "i16x3")]
+impl<I2C, E> Accelerometer for Adxl343<I2C>
+where
+    I2C: WriteRead<Error = E> + Write<Error = E>,
+    E: Debug,
+{
+    type Error = E;
+
+    /// Get normalized ±g reading from the accelerometer.
+    fn accel_norm(&mut self) -> Result<F32x3, Error<E>> {
+        let raw_data: I16x3 = self.accel_raw()?;
+        let range: f32 = self.data_format.range().into();
+
+        let x = (raw_data.x as f32 / core::i16::MAX as f32) * range;
+        let y = (raw_data.y as f32 / core::i16::MAX as f32) * range;
+        let z = (raw_data.z as f32 / core::i16::MAX as f32) * range;
+
+        Ok(F32x3::new(x, y, z))
+    }
+
+    /// Get sample rate of accelerometer in Hz.
+    ///
+    /// This is presently hardcoded to 100Hz - the default data rate.
+    /// See "Register 0x2C - BW_RATE" documentation in ADXL343 data sheet (p.23):
+    /// <https://www.analog.com/media/en/technical-documentation/data-sheets/adxl343.pdf>
+    ///
+    /// "The default value is 0x0A, which translates to a 100 Hz output data rate."
+    fn sample_rate(&mut self) -> Result<f32, Error<Self::Error>> {
+        Ok(100.0)
+    }
+}
+
+#[cfg(feature = "i16x3")]
 impl<I2C, E> RawAccelerometer<I16x3> for Adxl343<I2C>
 where
     I2C: WriteRead<Error = E> + Write<Error = E>,
@@ -175,15 +210,14 @@ where
 
     /// Get acceleration reading from the accelerometer
     fn accel_raw(&mut self) -> Result<I16x3, Error<E>> {
-        // TODO: return an error instead of panicking
-        assert!(
-            !self.data_format.contains(DataFormatFlags::JUSTIFY),
-            "can only read I16x3 in non-justified mode"
-        );
+        if self.data_format.contains(DataFormatFlags::JUSTIFY) {
+            return Err(Error::new(ErrorKind::Mode));
+        }
 
         let x = self.write_read_i16(Register::DATAX0)?;
         let y = self.write_read_i16(Register::DATAY0)?;
         let z = self.write_read_i16(Register::DATAZ0)?;
+
         Ok(I16x3::new(x, y, z))
     }
 }
@@ -198,15 +232,14 @@ where
 
     /// Get acceleration reading from the accelerometer
     fn accel_raw(&mut self) -> Result<U16x3, Error<E>> {
-        // TODO: return an error instead of panicking
-        assert!(
-            self.data_format.contains(DataFormatFlags::JUSTIFY),
-            "can only read I16x3 in non-justified mode"
-        );
+        if !self.data_format.contains(DataFormatFlags::JUSTIFY) {
+            return Err(Error::new(ErrorKind::Mode));
+        }
 
         let x = self.write_read_u16(Register::DATAX0)?;
         let y = self.write_read_u16(Register::DATAY0)?;
         let z = self.write_read_u16(Register::DATAZ0)?;
+
         Ok(U16x3::new(x, y, z))
     }
 }
