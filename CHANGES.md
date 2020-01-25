@@ -1,3 +1,8 @@
+## [0.8.0] (2020-01-25)
+
+- Impl the new (normalized) `Accelerometer` trait ([#31])
+- Update to accelerometer.rs v0.11 ([#30])
+
 ## [0.7.0] (2019-12-02)
 
 - Update to accelerometer.rs v0.10 ([#28])
@@ -40,6 +45,11 @@
 
 - Initial release
 
+[0.8.0]: https://github.com/NeoBirth/ADXL343.rs/pull/32
+[#31]: https://github.com/NeoBirth/ADXL343.rs/pull/31
+[#30]: https://github.com/NeoBirth/ADXL343.rs/pull/30
+[0.7.0]: https://github.com/NeoBirth/ADXL343.rs/pull/29
+[#28]: https://github.com/NeoBirth/ADXL343.rs/pull/28
 [0.6.0]: https://github.com/NeoBirth/ADXL343.rs/pull/27
 [#26]: https://github.com/NeoBirth/ADXL343.rs/pull/26
 [0.5.0]: https://github.com/NeoBirth/ADXL343.rs/pull/23
