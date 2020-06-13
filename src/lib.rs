@@ -42,6 +42,11 @@ pub struct Adxl343<I2C> {
 
     /// Current data format
     data_format: DataFormatFlags,
+
+    /// Invert the device's z-axis measurements.
+    ///
+    /// Useful if the ADXL343 IC is installed on the bottom of the board.
+    z_inverted: bool,
 }
 
 impl<I2C, E> Adxl343<I2C>
@@ -64,6 +69,7 @@ where
         let mut adxl343 = Adxl343 {
             i2c,
             data_format: data_format.into(),
+            z_inverted: false,
         };
 
         // Ensure we have the correct device ID for the ADLX343
@@ -108,6 +114,15 @@ where
         self.i2c.write(ADDRESS, &input)?;
         self.data_format = f;
         Ok(())
+    }
+
+    /// Invert the `z`-axis measurements.
+    ///
+    /// This is useful if the ADXL343 component is installed on the bottom of
+    /// the device (i.e. when it is laying face-up), rather than the top,
+    /// which will invert the z-axis readings.
+    pub fn invert_z_axis(&mut self, setting: bool) {
+        self.z_inverted = setting;
     }
 
     /// Write to the given register
@@ -183,7 +198,11 @@ where
 
         let x = (raw_data.x as f32 / core::i16::MAX as f32) * range;
         let y = (raw_data.y as f32 / core::i16::MAX as f32) * range;
-        let z = (raw_data.z as f32 / core::i16::MAX as f32) * range;
+        let mut z = (raw_data.z as f32 / core::i16::MAX as f32) * range;
+
+        if self.z_inverted {
+            z = -z;
+        }
 
         Ok(F32x3::new(x, y, z))
     }
@@ -216,7 +235,11 @@ where
 
         let x = self.write_read_i16(Register::DATAX0)?;
         let y = self.write_read_i16(Register::DATAY0)?;
-        let z = self.write_read_i16(Register::DATAZ0)?;
+        let mut z = self.write_read_i16(Register::DATAZ0)?;
+
+        if self.z_inverted {
+            z = -z;
+        }
 
         Ok(I16x3::new(x, y, z))
     }
@@ -238,7 +261,11 @@ where
 
         let x = self.write_read_u16(Register::DATAX0)?;
         let y = self.write_read_u16(Register::DATAY0)?;
-        let z = self.write_read_u16(Register::DATAZ0)?;
+        let mut z = self.write_read_u16(Register::DATAZ0)?;
+
+        if self.z_inverted {
+            z = -z;
+        }
 
         Ok(U16x3::new(x, y, z))
     }
