@@ -150,7 +150,7 @@ where
     fn write_read_i16(&mut self, register: Register) -> Result<i16, E> {
         let mut buffer = [0u8; 2];
         self.write_read_register(register, &mut buffer)?;
-        Ok(i16::from_be_bytes(buffer))
+        Ok(i16::from_le_bytes(buffer))
     }
 
     /// Write to a given register, then read a `u16` result
