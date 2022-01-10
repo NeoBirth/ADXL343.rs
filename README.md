@@ -20,7 +20,7 @@ Implements the [`Accelerometer` trait][acc-trait] from the
 ## Requirements
 
 - Rust 1.32+
-- `embedded-hal` I²C driver
+- `embedded-hal` I²C driver or SPI driver
 
 ## Code of Conduct
 
