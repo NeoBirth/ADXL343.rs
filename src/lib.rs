@@ -10,7 +10,7 @@
 #![forbid(unsafe_code)]
 #![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
 
-pub mod register;
+mod register;
 
 pub use crate::register::{DataFormatFlags, DataFormatRange, Register};
 pub use accelerometer;
