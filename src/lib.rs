@@ -12,11 +12,10 @@
 
 mod register;
 
-pub use crate::register::{DataFormatFlags, DataFormatRange};
+pub use crate::register::{DataFormatFlags, DataFormatRange, Register};
 pub use accelerometer;
 use embedded_hal as hal;
 
-use crate::register::Register;
 #[cfg(feature = "u16x3")]
 use accelerometer::vector::U16x3;
 #[cfg(feature = "i16x3")]
